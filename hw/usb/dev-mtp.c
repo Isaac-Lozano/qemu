@@ -909,8 +909,7 @@ static MTPData *usb_mtp_get_object_info(MTPState *s, MTPControl *c,
 
     if (o->stat.st_size > 0xFFFFFFFF) {
         usb_mtp_add_u32(d, 0xFFFFFFFF);
-    }
-    else {
+    } else {
         usb_mtp_add_u32(d, o->stat.st_size);
     }
 
@@ -1089,8 +1088,7 @@ static MTPData *usb_mtp_get_object_prop_value(MTPState *s, MTPControl *c,
     case PROP_PARENT_OBJECT:
         if (o->parent == NULL) {
             usb_mtp_add_u32(d, 0x00000000);
-        }
-        else {
+        } else {
             usb_mtp_add_u32(d, o->parent->handle);
         }
         break;
@@ -1381,9 +1379,9 @@ static void usb_mtp_handle_data(USBDevice *dev, USBPacket *p)
                 trace_usb_mtp_data_in(s->dev.addr, d->trans, d->length);
                 if (d->length + sizeof(container) > 0xFFFFFFFF) {
                     container.length = cpu_to_le32(0xFFFFFFFF);
-                }
-                else {
-                    container.length = cpu_to_le32(d->length + sizeof(container));
+                } else {
+                    container.length = cpu_to_le32(d->length +
+                                                   sizeof(container));
                 }
                 container.type   = cpu_to_le16(TYPE_DATA);
                 container.code   = cpu_to_le16(d->code);
