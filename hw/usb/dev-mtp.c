@@ -1396,7 +1396,6 @@ static void usb_mtp_handle_data(USBDevice *dev, USBPacket *p)
                     dlen = p->iov.size;
                 }
             }
-            printf("d->offset = %lu\n", d->offset);
             if (d->fd == -1) {
                 usb_packet_copy(p, d->data + d->offset, dlen);
             } else {
